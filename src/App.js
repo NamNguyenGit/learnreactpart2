@@ -1,12 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
+import heart from "./heart.png";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Nam</p>
+        <img src={heart} className="App-logo" alt="logo" />
+        <p>I Love You </p>
       </header>
     </div>
   );
