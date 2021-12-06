@@ -1,14 +1,14 @@
+import { Fragment } from "react";
 import "./App.css";
-import heart from "./heart.png";
+import ColorBox from "./Components/Color";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={heart} className="App-logo" alt="logo" />
-        <p>I love You </p>
-      </header>
-    </div>
+    <Fragment>
+      <ColorBox color="red"></ColorBox>
+      <ColorBox color="blue"></ColorBox>
+      <ColorBox color="white"></ColorBox>
+    </Fragment>
   );
 }
 
