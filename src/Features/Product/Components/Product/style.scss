@@ -1,0 +1,11 @@
+.img-product{
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+.product{
+    &_name {
+        font-weight: bold;
+        text-align: center;
+    }
+}
