@@ -2,18 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 TodoList.propTypes = {
-  todolist: PropTypes.array,
+  todoList: PropTypes.array,
 };
 
 TodoList.defaultProps = {
-  todolist: [],
+  todoList: [],
 };
 
-function TodoList(todolist) {
+function TodoList(props) {
+  const { todoList } = props;
   return (
     <ul>
-      {todolist.map((todoItem) => {
-        return <li key={todoItem.id}>{todoItem.title}</li>;
+      {todoList.map((todoItem) => {
+        return (
+          <li style={{ listStyle: "none" }} key={todoItem.id}>
+            {todoItem.title}
+          </li>
+        );
       })}
     </ul>
   );

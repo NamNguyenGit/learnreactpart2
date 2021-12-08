@@ -1,7 +1,9 @@
-import React, { memo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { Fragment } from "react";
+import TodoList from "./Components/TodoList";
 
-const TodoFeatures = memo((props) => {
+const TodoFeatures = (props) => {
   const todoList = [
     {
       id: 1,
@@ -16,8 +18,13 @@ const TodoFeatures = memo((props) => {
       title: "Break",
     },
   ];
-  return <></>;
-});
+  return (
+    <Fragment>
+      <h1>List To Do</h1>
+      <TodoList todoList={todoList}></TodoList>
+    </Fragment>
+  );
+};
 TodoFeatures.propTypes = {};
 
 export default TodoFeatures;
