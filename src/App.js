@@ -1,11 +1,11 @@
 import { Fragment } from "react";
 import "./App.css";
-import ProductFeatures from "./Features/Product";
+import TodoFeatures from "./Features/Todo";
 
 function App() {
   return (
     <Fragment>
-      <ProductFeatures />
+      <TodoFeatures />
     </Fragment>
   );
 }
