@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import TodoList from "./Components/TodoList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "reactstrap";
+import "./style.scss";
 
 const TodoFeatures = (props) => {
   const datatodoList = [
@@ -24,6 +25,10 @@ const TodoFeatures = (props) => {
     },
   ];
 
+  //state
+  const [todoList, settodoList] = useState(datatodoList);
+  const [filterstatus, setfilterstatus] = useState("all");
+
   const handleTodoClick = (todoItem, idx) => {
     //clone array to the new one
     const newTodoList = [...todoList];
@@ -40,19 +45,36 @@ const TodoFeatures = (props) => {
     settodoList(newTodoList);
   };
 
-  const [todoList, settodoList] = useState(datatodoList);
+  const handleshowall = () => {
+    setfilterstatus("all");
+  };
+  const handleshowdone = () => {
+    setfilterstatus("completed");
+  };
+  const handleshownew = () => {
+    setfilterstatus("new");
+  };
+
+  const newrenderTodolist = todoList.filter(
+    (todoItem) => filterstatus === "all" || filterstatus === todoItem.status
+  );
+  console.log(newrenderTodolist);
+
   return (
     <Fragment>
       <h1>List To Do</h1>
-      <TodoList onTodoClick={handleTodoClick} todoList={todoList}></TodoList>
+      <TodoList
+        onTodoClick={handleTodoClick}
+        todoList={newrenderTodolist}
+      ></TodoList>
       <div>
-        <Button style={{ margin: 5 }} color="warning">
+        <Button onClick={handleshowall} className="btn-click" color="success">
           Show all
         </Button>
-        <Button style={{ margin: 5 }} color="warning">
+        <Button onClick={handleshowdone} className="btn-click" color="warning">
           Show completed
         </Button>
-        <Button style={{ margin: 5 }} color="warning">
+        <Button onClick={handleshownew} className="btn-click" color="danger">
           Show new
         </Button>
       </div>
