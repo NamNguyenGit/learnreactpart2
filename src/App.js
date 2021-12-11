@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
 import Footer from "./Features/Header-Footer/Footer";
@@ -11,6 +11,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Switch>
+        <Redirect from="/home" to="/" exact></Redirect>
         <Route path="/" exact>
           Home Page
         </Route>
