@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import { Fragment } from "react";
 
@@ -6,7 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "reactstrap";
 import "../../style.scss";
 import TodoList from "../../Components/TodoList";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useLocation,
+  useRouteMatch,
+} from "react-router-dom/cjs/react-router-dom.min";
 const queryString = require("query-string");
 
 const ListPage = (props) => {
@@ -27,16 +31,25 @@ const ListPage = (props) => {
       status: "new",
     },
   ];
+
   //lay query params
   const location = useLocation();
 
+  //
+  const history = useHistory();
+  const match = useRouteMatch();
   //state
   const [todoList, settodoList] = useState(datatodoList);
   const [filterstatus, setfilterstatus] = useState(() => {
     const params = queryString.parse(location.search);
-    
-    return params.status ||  "all";
+    return params.status || "all";
   });
+
+  //update list theo locaiton
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    setfilterstatus(params.status || "all");
+  }, [location.search]);
 
   const handleTodoClick = (todoItem, idx) => {
     //clone array to the new one
@@ -55,19 +68,37 @@ const ListPage = (props) => {
   };
 
   const handleshowall = () => {
-    setfilterstatus("all");
+    // setfilterstatus("all");
+
+    const queryParam = { status: "all" };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParam),
+    });
   };
   const handleshowdone = () => {
-    setfilterstatus("completed");
+    // setfilterstatus("completed");
+    const queryParam = { status: "completed" };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParam),
+    });
   };
   const handleshownew = () => {
-    setfilterstatus("new");
+    // setfilterstatus("new");
+    const queryParam = { status: "new" };
+    history.push({
+      pathname: match.path,
+      search: queryString.stringify(queryParam),
+    });
   };
 
-  const newrenderTodolist = todoList.filter(
-    (todoItem) => filterstatus === "all" || filterstatus === todoItem.status
-  );
-  console.log(newrenderTodolist);
+  const newrenderTodolist = useMemo(() => {
+    return todoList.filter(
+      (todoItem) => filterstatus === "all" || filterstatus === todoItem.status
+    );
+  }, [todoList, filterstatus]);
+  // console.log(newrenderTodolist);
 
   return (
     <Fragment>
