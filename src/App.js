@@ -1,6 +1,7 @@
 import { Redirect, Route, Switch } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
+import NotFound from "./Components/NotFound";
 import Footer from "./Features/Header-Footer/Footer";
 import Header from "./Features/Header-Footer/Header";
 import ProductFeatures from "./Features/Product";
@@ -17,6 +18,8 @@ function App() {
         </Route>
         <Route path="/todos" component={TodoFeatures}></Route>
         <Route path="/products" component={ProductFeatures}></Route>
+
+        <Route component={NotFound} />
       </Switch>
       <Footer />
     </BrowserRouter>
