@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "reactstrap";
 import "../../style.scss";
 import TodoList from "../../Components/TodoList";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+const queryString = require("query-string");
 
 const ListPage = (props) => {
   const datatodoList = [
@@ -25,10 +27,16 @@ const ListPage = (props) => {
       status: "new",
     },
   ];
+  //lay query params
+  const location = useLocation();
 
   //state
   const [todoList, settodoList] = useState(datatodoList);
-  const [filterstatus, setfilterstatus] = useState("all");
+  const [filterstatus, setfilterstatus] = useState(() => {
+    const params = queryString.parse(location.search);
+    
+    return params.status ||  "all";
+  });
 
   const handleTodoClick = (todoItem, idx) => {
     //clone array to the new one
