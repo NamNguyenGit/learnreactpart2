@@ -23,7 +23,11 @@ function TodoForm(props) {
   });
 
   const handleSubmit = (values) => {
-    console.log('TODO FORMl', values);
+    const { onSubmit } = props;
+    if (onSubmit) {
+      onSubmit(values);
+    }
+    form.reset();
   };
 
   return (
