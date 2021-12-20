@@ -7,6 +7,7 @@ import { Button } from 'reactstrap';
 import '../../style.scss';
 import TodoList from '../../Components/TodoList';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
+import TodoForm from '../../Components/TodoForm';
 const queryString = require('query-string');
 
 const ListPage = (props) => {
@@ -95,8 +96,14 @@ const ListPage = (props) => {
     );
   }, [todoList, filterstatus]);
 
+  const handleTodoFormSubmit = (values) => {
+    console.log('Form submit: ', values);
+  };
+
   return (
     <Fragment>
+      <h3>What to to</h3>
+      <TodoForm onSubmit={handleTodoFormSubmit}></TodoForm>
       <h1>List To Do</h1>
       <TodoList onTodoClick={handleTodoClick} todoList={newrenderTodolist}></TodoList>
       <div>

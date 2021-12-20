@@ -12,11 +12,10 @@ import TodoFeatures from './Features/Todo';
 function App() {
   useEffect(() => {
     const params = {
-      id:  13761499,
+      id: 13761499,
     };
     const fetchProduct = async () => {
       const productlist = await productApi.getAll(params);
-      console.log(productlist);
     };
 
     fetchProduct();
